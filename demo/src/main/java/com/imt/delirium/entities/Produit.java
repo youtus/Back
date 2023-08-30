@@ -26,7 +26,7 @@ public class Produit {
 
     private String allergenes;
     @Column
-    public Integer id() {
+    public Integer getId() {
         return id;
     }
 
@@ -35,7 +35,7 @@ public class Produit {
         return this;
     }
 
-    public String titre() {
+    public String getTitre() {
         return titre;
     }
 
@@ -44,7 +44,7 @@ public class Produit {
         return this;
     }
 
-    public Long prix() {
+    public Long getPrix() {
         return prix;
     }
 
@@ -53,7 +53,7 @@ public class Produit {
         return this;
     }
 
-    public String categories() {
+    public String getCategories() {
         return categories;
     }
 
@@ -62,7 +62,7 @@ public class Produit {
         return this;
     }
 
-    public String description() {
+    public String getDescription() {
         return description;
     }
 
@@ -71,7 +71,7 @@ public class Produit {
         return this;
     }
 
-    public String allergenes() {
+    public String getAllergenes() {
         return allergenes;
     }
 

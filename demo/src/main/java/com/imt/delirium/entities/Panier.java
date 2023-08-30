@@ -9,7 +9,7 @@ public class Panier {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @OneToMany ( cascade = CascadeType.ALL )
     @JoinColumn
@@ -19,16 +19,15 @@ public class Panier {
     @JoinColumn(name = "adresse", nullable = false)
     private Adresse adresse;
 
-    public Integer id() {
+    public Long getId() {
         return id;
     }
 
-    public Panier setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-        return this;
     }
 
-    public List<Produit> listProduit() {
+    public List<Produit> getlistProduit() {
         return listProduit;
     }
 
@@ -37,12 +36,11 @@ public class Panier {
         return this;
     }
 
-    public Adresse adresse() {
+    public Adresse getAdresse() {
         return adresse;
     }
 
-    public Panier setAdresse(Adresse adresse) {
+    public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
-        return this;
     }
 }
