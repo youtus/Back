@@ -1,9 +1,7 @@
 package com.imt.delirium.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 @Entity
 public class Adresse {
 
@@ -16,6 +14,18 @@ public class Adresse {
     private String ville;
 
     private Integer cp;
+
+    @OneToOne(mappedBy = "adresse")
+    private Panier panier;
+
+    public Panier panier() {
+        return panier;
+    }
+
+    public Adresse setPanier(Panier panier) {
+        this.panier = panier;
+        return this;
+    }
 
     public Long getId() {
         return id;

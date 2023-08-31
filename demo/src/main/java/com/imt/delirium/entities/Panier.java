@@ -11,36 +11,28 @@ public class Panier {
     @GeneratedValue
     private Long id;
 
-    @OneToMany ( cascade = CascadeType.ALL )
-    @JoinColumn
+    @OneToMany
     private List<Produit> listProduit;
 
-    @OneToOne ( cascade = CascadeType.ALL )
-    @JoinColumn(name = "adresse", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="adresse_id", referencedColumnName = "id")
     private Adresse adresse;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(Long id) {this.id = id;}
 
     public List<Produit> getlistProduit() {
         return listProduit;
     }
 
-    public Panier setListProduit(ArrayList<Produit> listProduit) {
-        this.listProduit = listProduit;
-        return this;
-    }
+    public void setListProduit(List<Produit> listProduit) {this.listProduit = listProduit;}
 
     public Adresse getAdresse() {
         return adresse;
     }
 
-    public void setAdresse(Adresse adresse) {
-        this.adresse = adresse;
-    }
+    public void setAdresse(Adresse adresse) {this.adresse = adresse;}
 }
