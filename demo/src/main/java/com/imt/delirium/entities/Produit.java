@@ -25,6 +25,8 @@ public class Produit {
 
 
     private String allergenes;
+
+    private String urlImage;
     @Column
     public Integer getId() {
         return id;
@@ -78,5 +80,13 @@ public class Produit {
     public Produit setAllergenes(String allergenes) {
         this.allergenes = allergenes;
         return this;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }

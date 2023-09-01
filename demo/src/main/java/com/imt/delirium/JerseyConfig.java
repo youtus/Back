@@ -1,9 +1,11 @@
 package com.imt.delirium;
 
+import com.imt.delirium.config.CORSFilter;
 import com.imt.delirium.entities.Produit;
 import com.imt.delirium.ressources.AdresseRessources;
 import com.imt.delirium.ressources.PanierRessource;
 import com.imt.delirium.ressources.ProduitResource;
+import com.imt.delirium.ressources.UtilisateurRessources;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -18,5 +20,7 @@ public class JerseyConfig extends ResourceConfig {
         register(ProduitResource.class);
         register(AdresseRessources.class);
         register(PanierRessource.class);
+        register(UtilisateurRessources.class);
+        register(CORSFilter.class);
     }
 }

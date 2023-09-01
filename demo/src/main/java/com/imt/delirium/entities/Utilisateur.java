@@ -37,7 +37,7 @@ public class Utilisateur {
         return this;
     }
 
-    public String nom() {
+    public String getNom() {
         return nom;
     }
 
@@ -54,7 +54,7 @@ public class Utilisateur {
         this.prenom = prenom;
     }
 
-    public String mail() {
+    public String getMail() {
         return mail;
     }
 
@@ -63,7 +63,7 @@ public class Utilisateur {
         return this;
     }
 
-    public String pwd() {
+    public String getpwd() {
         return pwd;
     }
 
@@ -72,7 +72,7 @@ public class Utilisateur {
         return this;
     }
 
-    public Long solde() {
+    public Long getSolde() {
         return solde;
     }
 
