@@ -15,16 +15,28 @@ public class Adresse {
 
     private Integer cp;
 
-    @OneToOne(mappedBy = "adresse")
-    private Panier panier;
-
-    public Panier panier() {
-        return panier;
+    public String getRue() {
+        return rue;
     }
 
-    public Adresse setPanier(Panier panier) {
-        this.panier = panier;
-        return this;
+    public void setRue(String rue) {
+        this.rue = rue;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public Integer getCp() {
+        return cp;
+    }
+
+    public void setCp(Integer cp) {
+        this.cp = cp;
     }
 
     public Long getId() {
@@ -33,32 +45,5 @@ public class Adresse {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getRue() {
-        return rue;
-    }
-
-    public Adresse setRue(String rue) {
-        this.rue = rue;
-        return this;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public Adresse setVille(String ville) {
-        this.ville = ville;
-        return this;
-    }
-
-    public Integer getCp() {
-        return cp;
-    }
-
-    public Adresse setCp(Integer cp) {
-        this.cp = cp;
-        return this;
     }
 }
