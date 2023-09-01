@@ -30,9 +30,6 @@ public class PanierService {
         if (panier.getAdresse() == null) {
             throw new IllegalArgumentException("L'adresse ne peut pas être null");
         }
-        System.out.println("avant adresseRepository.save(panier.getAdresse());");
-        adresseRepository.save(panier.getAdresse());
-        System.out.println("après adresseRepository.save(panier.getAdresse());");
         panierRepository.save(panier);
     }
 

@@ -11,11 +11,10 @@ public class Panier {
     @GeneratedValue
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Produit> listProduit;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="adresse_id", referencedColumnName = "id")
     private Adresse adresse;
 
     public Long getId() {
