@@ -16,12 +16,15 @@ public class DemoApplication {
 	@PostConstruct
 	public void init() {
 		ProcessBuilder processBuilder = new ProcessBuilder();
-		processBuilder.command("python", "/sciptBdd/FillAdresse.py");
+		processBuilder.command("python", "/scriptBdd/FillAdresse.py");
+		System.out.println("iciiii");
 
 		try {
+			System.out.println("Dans le try du main");
 			Process process = processBuilder.start();
-			// Gérer le processus (attendre la fin, récupérer les erreurs, etc.)
-		} catch (IOException e) {
+			process.waitFor();
+			System.out.println("script du main lancé du main");
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}

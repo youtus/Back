@@ -1,7 +1,8 @@
 import requests
 import json
 
-url = "http://localhost:8080/adresse"
+url = "http://localhost:8080/demo/adresses"
+
 
 liste_adresses = [
     {'rue': '123 Rue de la Paix', 'ville': 'Paris', 'cp': 75000},
@@ -10,12 +11,11 @@ liste_adresses = [
     {'rue': '101 Rue Oberkampf', 'ville': 'Paris', 'cp': 75011},
 ]
 
-# Parcourir la liste pour ajouter chaque adresse
 for i, adresse_data in enumerate(liste_adresses):
-    # Envoi de la requête POST pour ajouter une nouvelle adresse
+
     response = requests.post(url, json=adresse_data)
 
-    # Vérification du résultat
+
     if response.status_code == 200 or response.status_code == 201:
         print(f"Adresse {i+1} ajoutée avec succès : {json.dumps(response.json(), indent=4)}")
     else:
