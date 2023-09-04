@@ -1,10 +1,7 @@
 package com.imt.delirium.entities;
 
-import com.imt.delirium.enumeration.Allergenes;
-import com.imt.delirium.enumeration.Categories;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @Entity
 public class Utilisateur {
