@@ -12,6 +12,7 @@ public class Panier {
     private Long id;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_produit")
     private List<Produit> listProduit;
 
     @OneToOne(cascade = CascadeType.ALL)
