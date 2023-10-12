@@ -1,61 +1,72 @@
 package com.imt.delirium.services;
 
+import com.imt.delirium.entities.ObjetPanier;
 import com.imt.delirium.entities.Panier;
-import com.imt.delirium.repositories.AdresseRepository;
+import com.imt.delirium.entities.Produit;
+import com.imt.delirium.entities.Utilisateur;
 import com.imt.delirium.repositories.PanierRepository;
+import com.imt.delirium.repositories.ProduitRepository;
+import com.imt.delirium.repositories.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class PanierService {
 
     @Autowired
     private PanierRepository panierRepository;
 
     @Autowired
-    private AdresseRepository adresseRepository;
+    private ProduitRepository produitRepository;
 
-    public List<Panier> getPaniers() {
-        return panierRepository.findAll();
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
+    public Panier getPanierByUtilisateurId(Long utilisateurId) {
+        Utilisateur utilisateur = utilisateurRepository.findById(utilisateurId)
+                .orElseThrow(() -> new RuntimeException("Utilisateur non trouvé"));
+        return utilisateur.getPanier();
     }
 
-    public Optional<Panier> getPanierById(Long id) {
-        return panierRepository.findById(id);
-    }
+    public void ajouterProduit(Long panierId, Long produitId, int quantite) {
+        Panier panier = panierRepository.findById(panierId)
+                .orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+        Produit produit = produitRepository.findById(produitId)
+                .orElseThrow(() -> new RuntimeException("Produit non trouvé"));
 
-    public void addPanier(Panier panier) {
-        if (panier.getAdresse() == null) {
-            throw new IllegalArgumentException("L'adresse ne peut pas être null");
-        }
+        ObjetPanier objetPanier = new ObjetPanier();
+        objetPanier.setProduit(produit);
+        objetPanier.setQuantite(quantite);
+
+        panier.getListObjetPanier().add(objetPanier);
         panierRepository.save(panier);
     }
 
+    public void retirerProduit(Long panierId, Long produitId) {
+        Panier panier = panierRepository.findById(panierId)
+                .orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+        ObjetPanier objetPanier = panier.getListObjetPanier().stream()
+                .filter(op -> op.getProduit().getId().equals(produitId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Produit non trouvé dans le panier"));
 
-    public boolean updatePanier(Long id, Panier newPanier) {
-        Optional<Panier> optionalPanier = panierRepository.findById(id);
-        if (optionalPanier.isPresent()) {
-            Panier existingPanier = optionalPanier.get();
-            existingPanier.setListProduit(newPanier.getlistProduit());
-            existingPanier.setAdresse(newPanier.getAdresse());
-            if (newPanier.getAdresse() != null) {
-                adresseRepository.save(newPanier.getAdresse());
-            }
-            panierRepository.save(existingPanier);
-            return true;
-        } else {
-            return false;
-        }
+        panier.getListObjetPanier().remove(objetPanier);
+        panierRepository.save(panier);
     }
 
-    public boolean deletePanier(Long id) {
-        if (panierRepository.existsById(id)) {
-            panierRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    public void modifierQuantiteProduit(Long panierId, Long produitId, int nouvelleQuantite) {
+        Panier panier = panierRepository.findById(panierId)
+                .orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+        ObjetPanier objetPanier = panier.getListObjetPanier().stream()
+                .filter(op -> op.getProduit().getId().equals(produitId))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Produit non trouvé dans le panier"));
+
+        objetPanier.setQuantite(nouvelleQuantite);
+        panierRepository.save(panier);
     }
 }

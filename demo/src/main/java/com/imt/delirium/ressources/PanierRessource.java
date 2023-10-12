@@ -3,12 +3,9 @@ package com.imt.delirium.ressources;
 import com.imt.delirium.entities.Panier;
 import com.imt.delirium.services.PanierService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
-import java.util.Optional;
 
 @Path("/paniers")
 public class PanierRessource {
@@ -17,51 +14,33 @@ public class PanierRessource {
     PanierService panierService;
 
     @GET
+    @Path("/{utilisateurId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPaniers() {
-        List<Panier> paniers = panierService.getPaniers();
-        return Response.ok(paniers).build();
-    }
-
-    @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getPanier(@PathParam("id") Long id) {
-        Optional<Panier> panier = panierService.getPanierById(id);
-        if (panier != null) {
-            return Response.ok(panier).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+    public Response getPanierByUtilisateurId(@PathParam("utilisateurId") Long utilisateurId) {
+        Panier panier = panierService.getPanierByUtilisateurId(utilisateurId);
+        return Response.ok(panier).build();
     }
 
     @POST
+    @Path("/{panierId}/produits/{produitId}/{quantite}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addPanier(Panier panier) {
-        System.out.println("avant panierService.addPanier(panier);");
-        panierService.addPanier(panier);
-        System.out.println("après panierService.addPanier(panier);");
+    public Response ajouterProduit(@PathParam("panierId") Long panierId, @PathParam("produitId") Long produitId, @PathParam("quantite") int quantite) {
+        panierService.ajouterProduit(panierId, produitId, quantite);
         return Response.status(Response.Status.CREATED).build();
     }
 
     @PUT
-    @Path("/{id}")
+    @Path("/{panierId}/produits/{produitId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updatePanier(@PathParam("id") Long id, Panier panier) {
-        if (panierService.updatePanier(id, panier)) {
-            return Response.ok().build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+    public Response modifierQuantiteProduit(@PathParam("panierId") Long panierId, @PathParam("produitId") Long produitId, int nouvelleQuantite) {
+        panierService.modifierQuantiteProduit(panierId, produitId, nouvelleQuantite);
+        return Response.ok().build();
     }
 
     @DELETE
-    @Path("/{id}")
-    public Response deletePanier(@PathParam("id") Long id) {
-        if (panierService.deletePanier(id)) {
-            return Response.ok().build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+    @Path("/{panierId}/produits/{produitId}")
+    public Response retirerProduit(@PathParam("panierId") Long panierId, @PathParam("produitId") Long produitId) {
+        panierService.retirerProduit(panierId, produitId);
+        return Response.ok().build();
     }
 }

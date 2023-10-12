@@ -8,7 +8,8 @@ liste_produit = [{
                 "prix": 15,
                 "categories": "plat",
                 "description": "Un repas delicieux",
-                "allergenes": "Gluten"
+                "allergenes": "Gluten",
+                "urlImage": "https://www.lepoint.fr/images/2020/07/28/20580909lpw-20580940-article-jpg_7259436_1250x625.jpg"
             },
             {
                 "titre": "Mousse au chocolat",

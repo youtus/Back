@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,9 @@ public class UtilisateurRessources {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private UtilisateurRepository AuthData;
 
     @GET
     @Produces(value = "application/json")
@@ -30,10 +34,26 @@ public class UtilisateurRessources {
 
     @POST
     @Consumes(value = "application/json")
-    public void createUtilisateur(@NotNull @RequestBody Utilisateur adresse){utilisateurRepository.save(adresse);}
+    public void createUtilisateur(@NotNull @RequestBody Utilisateur utilisateur){utilisateurRepository.save(utilisateur);}
 
     @DELETE
     @Consumes(value = "application/json")
     @Path("/{id}")
     public void deleteUtilisateur(@NotNull @PathParam("id") Long id){utilisateurRepository.deleteById(id);}
+
+
+    @POST
+    @Path("/auth")
+    @Consumes(value = "application/json")
+    @Produces(value = "application/json")
+    public Response authenticateUser(@NotNull @RequestBody AuthData authData) {
+        Utilisateur utilisateur = utilisateurRepository.findByEmailAndPassword(authData.getEmail(), authData.getPassword());
+        if (utilisateur != null) {
+            return Response.ok(utilisateur).build();
+        } else {
+            System.out.println("mail: "+authData.getEmail()+" password: "+authData.getPassword());
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+    }
+
 }

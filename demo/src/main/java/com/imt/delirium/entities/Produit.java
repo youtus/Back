@@ -23,9 +23,9 @@ public class Produit {
     @Column
     private String description;
 
-
+    @Column
     private String allergenes;
-
+    @Column
     private String urlImage;
     @Column
     public Integer getId() {

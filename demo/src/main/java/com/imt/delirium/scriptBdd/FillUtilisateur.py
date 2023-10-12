@@ -6,19 +6,13 @@ url = "http://localhost:8080/demo/utilisateurs/"
 liste_utilisateur =[
     {'nom': 'Dupond',
     'prenom' : 'Olivier',
-    'mail' : 'dupont@mail.com',
-    'pwd' : 'xxxxx',
-    'solde' : 788875},
-     {'nom': 'Tom',
-    'prenom' : 'Beranger',
-    'mail' : 'Tom@mail.com',
-    'pwd' : 'xxxxx',
-    'solde' : 58458},
-     {'nom': 'antoine',
-    'prenom' : 'chauvin',
-    'mail' : 'antoine@mail.com',
-    'pwd' : 'xxxxx',
-    'solde' : 58458}
+    'email' : 'z',
+    'password' : 'z',
+    'solde' : 788875,
+    'panier':{
+        'id:45'
+    },
+    }
 ]
 
 

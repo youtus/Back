@@ -8,7 +8,7 @@ public class Utilisateur {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @Column
     private String nom;
@@ -17,19 +17,23 @@ public class Utilisateur {
     private String prenom;
 
     @Column
-    private String mail;
+    private String email;
 
     @Column
-    private String pwd;
+    private String password;
 
     @Column
     private Long solde;
 
-    public Integer id() {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "panier_id", referencedColumnName = "id")
+    private Panier panier;
+
+    public Long getId() {
         return id;
     }
 
-    public Utilisateur setId(Integer id) {
+    public Utilisateur setId(Long id) {
         this.id = id;
         return this;
     }
@@ -51,21 +55,21 @@ public class Utilisateur {
         this.prenom = prenom;
     }
 
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
-    public Utilisateur setMail(String mail) {
-        this.mail = mail;
+    public Utilisateur setEmail(String email) {
+        this.email = email;
         return this;
     }
 
-    public String getpwd() {
-        return pwd;
+    public String getPassword() {
+        return password;
     }
 
-    public Utilisateur setPwd(String pwd) {
-        this.pwd = pwd;
+    public Utilisateur setPassword(String password) {
+        this.password = password;
         return this;
     }
 
@@ -76,5 +80,13 @@ public class Utilisateur {
     public Utilisateur setSolde(Long solde) {
         this.solde = solde;
         return this;
+    }
+
+    public Panier getPanier() {
+        return panier;
+    }
+
+    public void setPanier(Panier panier) {
+        this.panier = panier;
     }
 }

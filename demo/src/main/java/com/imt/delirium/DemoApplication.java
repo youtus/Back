@@ -17,10 +17,8 @@ public class DemoApplication {
 	public void init() {
 		ProcessBuilder processBuilder = new ProcessBuilder();
 		processBuilder.command("python", "/scriptBdd/FillAdresse.py");
-		System.out.println("iciiii");
 
 		try {
-			System.out.println("Dans le try du main");
 			Process process = processBuilder.start();
 			process.waitFor();
 			System.out.println("script du main lancé du main");
