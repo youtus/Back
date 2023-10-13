@@ -1,5 +1,8 @@
 package com.imt.delirium.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,7 @@ public class Panier {
     private Long id;
 
     @OneToOne(mappedBy = "panier", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Utilisateur utilisateur;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

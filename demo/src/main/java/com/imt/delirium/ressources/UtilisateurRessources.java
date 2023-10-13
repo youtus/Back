@@ -3,11 +3,13 @@ package com.imt.delirium.ressources;
 
 import com.imt.delirium.entities.Utilisateur;
 import com.imt.delirium.repositories.UtilisateurRepository;
+import com.imt.delirium.services.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +21,10 @@ public class UtilisateurRessources {
     private UtilisateurRepository utilisateurRepository;
 
     @Autowired
-    private UtilisateurRepository AuthData;
+    private AuthData AuthData;
+
+    @Autowired
+    private UtilisateurService utilisateurService;
 
     @GET
     @Produces(value = "application/json")
@@ -34,7 +39,16 @@ public class UtilisateurRessources {
 
     @POST
     @Consumes(value = "application/json")
-    public void createUtilisateur(@NotNull @RequestBody Utilisateur utilisateur){utilisateurRepository.save(utilisateur);}
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createUtilisateur(@NotNull @RequestBody Utilisateur utilisateur){
+        Utilisateur verifUtil = utilisateurRepository.findByEmailAndPassword(utilisateur.getEmail(), utilisateur.getPassword());
+        if (verifUtil == null) {
+            return Response.status(Response.Status.CONFLICT).build();
+        } else {
+            Utilisateur utili = utilisateurRepository.save(utilisateur);
+            return Response.ok(utilisateur).build();
+        }
+    }
 
     @DELETE
     @Consumes(value = "application/json")
@@ -51,7 +65,6 @@ public class UtilisateurRessources {
         if (utilisateur != null) {
             return Response.ok(utilisateur).build();
         } else {
-            System.out.println("mail: "+authData.getEmail()+" password: "+authData.getPassword());
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }

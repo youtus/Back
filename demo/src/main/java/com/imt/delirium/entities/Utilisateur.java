@@ -1,6 +1,8 @@
 package com.imt.delirium.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -27,7 +29,20 @@ public class Utilisateur {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "panier_id", referencedColumnName = "id")
+    @JsonManagedReference
     private Panier panier;
+
+    @PrePersist
+    public void prePersist() {
+        if (solde == null) {
+            solde = 0L;  // ou toute autre valeur par défaut
+        }
+        if (panier == null) {
+            panier = new Panier();  // ou toute autre valeur par défaut
+        }
+    }
+
+
 
     public Long getId() {
         return id;

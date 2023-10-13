@@ -4,14 +4,12 @@ import json
 url = "http://localhost:8080/demo/utilisateurs/"
 
 liste_utilisateur =[
-    {'nom': 'Dupond',
-    'prenom' : 'Olivier',
-    'email' : 'z',
-    'password' : 'z',
-    'solde' : 788875,
-    'panier':{
-        'id:45'
-    },
+    {'nom': 't',
+    'prenom' : 't',
+    'email' : 't',
+    'password' : 't',
+    'solde' : 10000,
+    'panier': {}
     }
 ]
 

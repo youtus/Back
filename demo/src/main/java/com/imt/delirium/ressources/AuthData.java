@@ -1,6 +1,8 @@
 package com.imt.delirium.ressources;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthData {
     private String email;
     private String password;
