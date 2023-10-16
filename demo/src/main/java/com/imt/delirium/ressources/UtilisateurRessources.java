@@ -42,7 +42,7 @@ public class UtilisateurRessources {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUtilisateur(@NotNull @RequestBody Utilisateur utilisateur){
         Utilisateur verifUtil = utilisateurRepository.findByEmailAndPassword(utilisateur.getEmail(), utilisateur.getPassword());
-        if (verifUtil == null) {
+        if (verifUtil != null) {
             return Response.status(Response.Status.CONFLICT).build();
         } else {
             Utilisateur utili = utilisateurRepository.save(utilisateur);

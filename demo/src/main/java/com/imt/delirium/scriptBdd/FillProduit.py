@@ -6,7 +6,7 @@ url = "http://localhost:8080/demo/produits"
 liste_produit = [{
                 "titre": "Poulet frite",
                 "prix": 15,
-                "categories": "plat",
+                "categories": "carnassier",
                 "description": "Un repas delicieux",
                 "allergenes": "Gluten",
                 "urlImage": "https://www.lepoint.fr/images/2020/07/28/20580909lpw-20580940-article-jpg_7259436_1250x625.jpg"
@@ -14,14 +14,14 @@ liste_produit = [{
             {
                 "titre": "Mousse au chocolat",
                 "prix": 4,
-                "categories": "dessert",
+                "categories": "gras",
                 "description": "Au cacao de Madagascar",
                 "allergenes": "Oeufs"
             },
             {
                 "titre": "Maroille",
                 "prix": 8,
-                "categories": "lactose",
+                "categories": "gras",
                 "description": "Un fromage incontournable",
                 "allergenes": "lactose"
             },
@@ -35,7 +35,7 @@ liste_produit = [{
             {
                "titre": "Steack haricot vert",
                "prix": 10,
-               "categories": "plat",
+               "categories": "healthy",
                 "description": "Pour les plus sportifs d'entre nous",
                 "allergenes": ""
             }

@@ -18,7 +18,7 @@ public class Panier {
     @JsonBackReference
     private Utilisateur utilisateur;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "panier_id")
     private List<ObjetPanier> listObjetPanier = new ArrayList<>();
 

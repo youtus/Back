@@ -7,10 +7,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.imt.delirium.enumeration.Categories;
+
 
 @Path("produits")
 public class ProduitResource {
+
+    public static final List<String> ListCategories = Arrays.stream(Categories.values())
+            .map(Enum::name)
+            .collect(Collectors.toList());
+
 
     @Autowired
     private ProduitRepository produitRepository;
@@ -19,6 +29,13 @@ public class ProduitResource {
     @Produces(value = "application/json")
     public List<Produit> getProduits(){
         return produitRepository.findAll();
+    }
+
+    @GET
+    @Path("/categories")
+    @Produces(value = "application/json")
+    public List<String> getCategorie(){
+        return ListCategories;
     }
 
     @POST
