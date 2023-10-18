@@ -9,7 +9,7 @@ public class Produit {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private Long id;
 
     @Column
     private String titre;
@@ -28,11 +28,11 @@ public class Produit {
     @Column
     private String urlImage;
     @Column
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public Produit setId(Integer id) {
+    public Produit setId(Long id) {
         this.id = id;
         return this;
     }

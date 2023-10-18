@@ -32,19 +32,23 @@ public class PanierService {
         return utilisateur.getPanier();
     }
 
+    @Transactional
     public void ajouterProduit(Long panierId, Long produitId, int quantite) {
         Panier panier = panierRepository.findById(panierId)
-                .orElseThrow(() -> new RuntimeException("Panier non trouvé"));
+                .orElseThrow(() -> new RuntimeException("Panier avec ID " + panierId + " non trouvé"));
+
         Produit produit = produitRepository.findById(produitId)
-                .orElseThrow(() -> new RuntimeException("Produit non trouvé"));
+                .orElseThrow(() -> new RuntimeException("Produit avec ID " + produitId + " non trouvé"));
 
         ObjetPanier objetPanier = new ObjetPanier();
         objetPanier.setProduit(produit);
         objetPanier.setQuantite(quantite);
 
-        panier.getListObjetPanier().add(objetPanier);
+        panier.addListObjetPanier(objetPanier);
+
         panierRepository.save(panier);
     }
+
 
     public void retirerProduit(Long panierId, Long produitId) {
         Panier panier = panierRepository.findById(panierId)

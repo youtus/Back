@@ -3,6 +3,9 @@ package com.imt.delirium.ressources;
 import com.imt.delirium.entities.Panier;
 import com.imt.delirium.services.PanierService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,11 +25,12 @@ public class PanierRessource {
     }
 
     @POST
-    @Path("/{panierId}/produits/{produitId}/{quantite}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response ajouterProduit(@PathParam("panierId") Long panierId, @PathParam("produitId") Long produitId, @PathParam("quantite") int quantite) {
-        panierService.ajouterProduit(panierId, produitId, quantite);
-        return Response.status(Response.Status.CREATED).build();
+    @Path("/ajouterproduit")
+    @Consumes(value = "application/json")
+    //@Produces(value = "application/json")
+    public Response ajouterProduit(@NotNull @RequestBody AjouterProduitData data) {
+        panierService.ajouterProduit(data.getPanierId(), data.getProduitId(), data.getQuantity());
+        return Response.ok().build();
     }
 
     @PUT

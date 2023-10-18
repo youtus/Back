@@ -35,10 +35,10 @@ public class Utilisateur {
     @PrePersist
     public void prePersist() {
         if (solde == null) {
-            solde = 0L;  // ou toute autre valeur par défaut
+            solde = 0L;
         }
         if (panier == null) {
-            panier = new Panier();  // ou toute autre valeur par défaut
+            panier = new Panier();
         }
     }
 

@@ -19,6 +19,7 @@ public class JerseyConfig extends ResourceConfig {
         register(PanierRessource.class);
         register(UtilisateurRessources.class);
         register(AuthData.class);
+        register(AjouterProduitData.class);
         register(CORSFilter.class);
     }
 }

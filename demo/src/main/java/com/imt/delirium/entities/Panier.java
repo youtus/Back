@@ -49,6 +49,10 @@ public class Panier {
         this.listObjetPanier = listObjetPanier;
     }
 
+    public void addListObjetPanier(ObjetPanier o){
+        this.listObjetPanier.add(o);
+    }
+
     public Adresse getAdresse() {
         return adresse;
     }
